@@ -2,6 +2,53 @@ error :
 
 (gaustudio) root@C.26531104:/workspace/gaustudio/submodules/gaustudio-diff-gaussian-rasterization$ gs-extract-mesh -m /workspace/my_project/0fae8293-6b_only30k -o /workspace/my_project/0fae8293-6b_only30k/mesh_output Loading trained model at iteration 30000 Loaded 152370 points from /workspace/my_project/0fae8293-6b_only30k/point_cloud/iteration_30000/point_cloud.ply Loading camera data from /workspace/my_project/cameras.json 0%| | 0/140 [00:00<?, ?it/s]/venv/gaustudio/lib/python3.10/site-packages/torch/functional.py:539: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3611.) return _VF.meshgrid(tensors, **kwargs) # type: ignore[attr-defined] Segmentation fault (gaustudio) root@C.26531104:/workspace/gaustudio/submodules/gaustudio-diff-gaussian-rasterization$
 
+chatGPT :
+
+Ah — the Segmentation fault is still happening, which means it’s likely not just the CUDA version, but could be one of these issues:
+
+Possible causes
+
+PyTorch + CUDA mismatch
+
+You’re using PyTorch nightly 2.6.0.dev20241112 + cu121, but your system’s nvcc is 12.6.
+
+Even though the extension compiled, PyTorch’s CUDA runtime may be incompatible. GauStudio has been tested mostly on torch 1.12.1 + cu113 or torch 2.0.1 + cu118.
+
+Point cloud / cameras data
+
+Sometimes a corrupted or unusual point_cloud.ply or cameras.json causes segmentation during rasterization.
+
+Make sure your point_cloud/iteration_30000/point_cloud.ply matches the expected format.
+
+vdbfusion / other C++ extensions
+
+If vdbfusion or the rasterizer .so isn’t properly compiled against the exact CUDA and PyTorch version, it can segfault.
+
+
+
+Recommended fix
+
+I strongly suggest aligning PyTorch + CUDA to a version known to work with GauStudio, even if it means using CUDA 11.3 or 11.8:
+
+PyTorch	CUDA	Notes
+1.12.1	11.3	Tested by GauStudio
+2.0.1	11.8	Also works
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
