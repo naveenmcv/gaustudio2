@@ -1,0 +1,4 @@
+(gaustudio) root@C.26531104:/workspace/gaustudio/submodules/gaustudio-diff-gaussian-rasterization$ gs-extract-mesh -m /workspace/my_project/0fae8293-6b_only30k -o /workspace/my_project/0fae8293-6b_only30k/mesh_output Loading trained model at iteration 30000 Loaded 152370 points from /workspace/my_project/0fae8293-6b_only30k/point_cloud/iteration_30000/point_cloud.ply Loading camera data from /workspace/my_project/cameras.json 0%| | 0/140 [00:00<?, ?it/s]/venv/gaustudio/lib/python3.10/site-packages/torch/functional.py:539: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3611.) return _VF.meshgrid(tensors, **kwargs) # type: ignore[attr-defined] Segmentation fault (gaustudio) root@C.26531104:/workspace/gaustudio/submodules/gaustudio-diff-gaussian-rasterization$
+
+
+
