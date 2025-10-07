@@ -11,11 +11,11 @@ Gaustudio nvidia template
 Step-by-Step Setup Guide for GauStudio
 ✅ 1. System & Environment Check
 On your Vast.ai terminal, confirm GPU, CUDA, and Python:
-
+```
 nvidia-smi
 nvcc --version
 python3 --version
-
+```
 Expected:
 CUDA 11.3–12.x ✅
 Python ≥ 3.8 ✅
