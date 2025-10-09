@@ -1,0 +1,43 @@
+1 reconnecting vast ai instance
+-----copy ssh
+---- open git bash and paste---
+# it will be like this
+>>neula@LAPTOP-2TILA44T MINGW64 ~
+
+# then it will change like this
+>> (base) root@ubuntu:~#
+
+
+--------------- i
+
+
+Step 4: Reactivate your environment
+
+Once connected, re-enable your Python environment:
+
+conda activate main
+# or if that doesn’t work:
+source /venv/main/bin/activate
+--------- if it doenst start gaustudi
+
+# try this  to list the environements
+conda info --envs
+
+>>
+
+(base) root@ubuntu:~# conda info --envs
+
+# conda environments:
+#
+base                 * /root/miniconda
+gaustudio              /root/miniconda/envs/gaustudio
+
+(base) root@ubuntu:~#
+-----------------------conda activate gaustudio
+
+(base) root@ubuntu:~# conda activate gaustudio
+>>
+(gaustudio) root@ubuntu:~#
+
+
+---------------
