@@ -1,0 +1,84 @@
+----------- iteration 1
+
+
+---- works - only without file name, just mention folder.
+python3 /workspace/gau_studio_project/gaustudio/gaustudio/scripts/extract_mesh.py \
+  -m /workspace/my_project/0fae8293-6b_only30k \
+  -o /workspace/my_project/output/0fae8293-6b_only30k \
+  -c /workspace/gau_studio_project/gaustudio/gaustudio/configs/vanilla.yaml
+
+
+XXXX ------- with file name --- gaustudio DOESNT SUPPORT THIS. -xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+python3 /workspace/gau_studio_project/gaustudio/gaustudio/scripts/extract_mesh.py \
+  -m /workspace/my_project/0fae8293-6b_only30k \
+  -o /workspace/my_project/output/0fae8293-6b_only30k \fused_mesh_V_0_01.ply \
+  -c /workspace/gau_studio_project/gaustudio/gaustudio/configs/vanilla.yaml
+----
+
+remove the file 
+
+(gaustudio) root@ubuntu:/workspace/my_project/output/0fae8293-6b_only30k#  rm fused_mesh.ply
+(gaustudio) root@ubuntu:/workspace/my_project/output/0fae8293-6b_only30k# ls
+
+
+---- without file name
+python3 /workspace/gau_studio_project/gaustudio/gaustudio/scripts/extract_mesh.py \
+  -m /workspace/my_project/0fae8293-6b_only30k \
+  -o /workspace/my_project/output/0fae8293-6b_only30k \
+  -c /workspace/gau_studio_project/gaustudio/gaustudio/configs/vanilla.yaml
+  --voxel_size 0.01
+
+---- without file name
+python3 /workspace/gau_studio_project/gaustudio/gaustudio/scripts/extract_mesh.py \
+  -m /workspace/my_project/0fae8293-6b_only30k \
+  -o /workspace/my_project/output/0fae8293-6b_only30k \
+  -c /workspace/gau_studio_project/gaustudio/gaustudio/configs/vanilla.yaml
+  --voxel_size 0.001
+
+
+------------------------------------ copy yamlconfig file and try
+
+cp /workspace/gau_studio_project/gaustudio/gaustudio/configs/vanilla.yaml /workspace/my_project/temp_vanilla.yaml
+
+
+
+------- YAML file
+--- read file ---cat
+cat /workspace/my_project/temp_vanilla.yaml
+
+
+
+------------ Open the copied file in an editor--------nano
+nano /workspace/my_project/temp_vanilla.yaml
+----
+Save and exit
+In nano: Press Ctrl+O → Enter → Ctrl+X
+In vim: Press Esc → :wq → Enter
+
+
+----------------------  NOW RUN AGAIN WITH NEW YAML CONFIG
+
+python3 /workspace/gau_studio_project/gaustudio/gaustudio/scripts/extract_mesh.py \
+-m /workspace/my_project/0fae8293-6b_only30k \
+-o /workspace/my_project/output/0fae8293-6b_only30k \
+-c /workspace/my_project/temp_vanilla.yaml
+
+
+
+------------- USe a different approach using Open3d
+
+python3 <<EOF
+import open3d as o3d
+
+mesh = o3d.io.read_triangle_mesh("fused_mesh.ply")
+mesh = mesh.filter_smooth_laplacian(number_of_iterations=10)
+o3d.io.write_triangle_mesh("fused_mesh_smooth.ply", mesh)
+
+print("Smooth mesh saved as fused_mesh_smooth.ply")
+EOF
+---------------
+
+
+
+
+
